@@ -2,7 +2,7 @@ https://gist.github.com/abir-taheer
 
 if (window.location.origin !== "https://www.instagram.com") {
   window.alert(
-    "You need to be on the instagram site before you run the code. I'm taking you there now but you're going to have to run the code into the console again.",
+    "Hey! You need to be on the instagram site before you run the code. I'm taking you there now but you're going to have to run the code into the console again.",
   );
   window.location.href = "https://www.instagram.com";
   console.clear();
@@ -16,13 +16,13 @@ const fetchOptions = {
   method: "GET",
 };
 
-
 let username;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const random = (min, max) => Math.ceil(Math.random() * (max - min)) + min;
+const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-
+// This function handles all of the pagination logic
+// Calls the API recursively until there are no more pages to load
 const concatFriendshipsApiResponse = async (
   list,
   user_id,
@@ -37,7 +37,7 @@ const concatFriendshipsApiResponse = async (
   const data = await fetch(url, fetchOptions).then((r) => r.json());
 
   if (data.next_max_id) {
-    const timeToSleep = random(100, 500);
+    const timeToSleep = random(800, 1500);
     console.log(
       `Loaded ${data.users.length} ${list}. Sleeping ${timeToSleep}ms to avoid rate limiting`,
     );
@@ -57,6 +57,7 @@ const concatFriendshipsApiResponse = async (
   return data.users;
 };
 
+// helper methods to make the code a bit more readable
 const getFollowers = (user_id, count = 50, next_max_id = "") => {
   return concatFriendshipsApiResponse("followers", user_id, count, next_max_id);
 };
@@ -126,7 +127,12 @@ const getUserFriendshipStats = async (username) => {
   };
 };
 
-
-username = "REPLACE WITH YOUR OWN USERNAME, KEEP INSIDE QUOTATION MARKS";
-
+// Make sure you don't delete the quotes
+// Replace "example_username" below with your instagram username
+//
+// Change this:
+username = "example_username";
+//
+//
+//
 getUserFriendshipStats(username).then(console.log);
