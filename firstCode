@@ -1,8 +1,6 @@
-https://gist.github.com/abir-taheer
-
 if (window.location.origin !== "https://www.instagram.com") {
   window.alert(
-    "Hey! You need to be on the instagram site before you run the code. I'm taking you there now but you're going to have to run the code into the console again.",
+    "run inside console on web",
   );
   window.location.href = "https://www.instagram.com";
   console.clear();
@@ -21,8 +19,6 @@ let username;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-// This function handles all of the pagination logic
-// Calls the API recursively until there are no more pages to load
 const concatFriendshipsApiResponse = async (
   list,
   user_id,
@@ -57,7 +53,6 @@ const concatFriendshipsApiResponse = async (
   return data.users;
 };
 
-// helper methods to make the code a bit more readable
 const getFollowers = (user_id, count = 50, next_max_id = "") => {
   return concatFriendshipsApiResponse("followers", user_id, count, next_max_id);
 };
@@ -110,7 +105,7 @@ const getUserFriendshipStats = async (username) => {
   );
 
   console.log(
-    `If this doesn't seem right then some of the output might be inaccurate`,
+    `disclaimer: might be wrong its up to you to double check LOL`,
   );
 
   const PeopleIDontFollowBack = Array.from(followerSet).filter(
@@ -127,12 +122,9 @@ const getUserFriendshipStats = async (username) => {
   };
 };
 
-// Make sure you don't delete the quotes
-// Replace "example_username" below with your instagram username
-//
-// Change this:
-username = "example_username";
-//
-//
-//
+
+// replace "input_user" below with your instagram username, dont delete the quotations
+
+username = "input_user";
+
 getUserFriendshipStats(username).then(console.log);
